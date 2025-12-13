@@ -1,4 +1,5 @@
 # PianoFight Event Calendar Widget
+![Calendar](screenshot.png)
 
 A custom-built calendar widget for displaying theater events with search, filtering, and date navigation capabilities.
 
