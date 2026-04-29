@@ -5,7 +5,7 @@ A custom-built calendar widget for displaying theater events with search, filter
 
 ## Overview
 
-PianoFight needed a way to display their upcoming events in an intuitive, searchable calendar format on their website. At the time, Eventbrite didn't offer a suitable out-of-the-box calendar widget that met our needs, so I built a custom solution that integrates with their event data API.
+PianoFight needed a way to display upcoming events in an intuitive, searchable calendar format on their website. At the time, Eventbrite didn't offer a suitable out-of-the-box calendar widget with the features we needed, so I built a custom solution that integrates with their event data API.
 
 ## The Problem
 
@@ -29,24 +29,24 @@ A JavaScript-powered calendar widget that:
 
 ## Key Features
 
-### 1. **Smart Search with Highlighting**
+### 1. Smart Search with Highlighting
 - Real-time search across event names, descriptions, categories, and prices
-- Search terms are highlighted in yellow for easy scanning
+- Search terms highlighted in yellow for easy scanning
 - Search state persists via URL query parameters
 
-### 2. **Multi-faceted Filtering**
-- **Category Filter**: Comedy, Music, Theater, Dance, Film, Other
-- **Date Filter**: Custom date picker to jump to specific dates
-- **Price Filter**: Toggle to show only free events
+### 2. Multi-faceted Filtering
+- **Category Filter** — Comedy, Music, Theater, Dance, Film, Other
+- **Date Filter** — Custom date picker to jump to specific dates
+- **Price Filter** — Toggle to show only free events
 - **All filters work together** for precise results
 
-### 3. **Chronological Organization**
+### 3. Chronological Organization
 - Events automatically grouped by date
 - Shows "Today" and "Tomorrow" labels for context
 - Displays "Closed" for dates with no events
 - Continues through all upcoming events
 
-### 4. **Rich Event Cards**
+### 4. Rich Event Cards
 - Event poster image
 - Show name and description
 - Category tag (#Comedy, #Music, etc.)
@@ -54,78 +54,78 @@ A JavaScript-powered calendar widget that:
 - Show time in 12-hour format
 - Direct link to Eventbrite page
 
-### 5. **Analytics Integration**
+### 5. Analytics Integration
 - Tracks search box usage
 - Monitors date picker interactions
 - Appends Google Analytics client ID to Eventbrite URLs for attribution
 - Includes custom affiliate parameter (`?aff=pfcal`)
 
-### 6. **Technical Optimizations**
-- **Cache Busting**: Random query parameters ensure fresh data
-- **Timezone Handling**: Automatic PST/PDT conversion
-- **Responsive Design**: Adapts to mobile and desktop
-- **Performance**: Minimal DOM manipulation, efficient filtering
+### 6. Technical Optimizations
+- **Cache Busting** — Random query parameters ensure fresh data
+- **Timezone Handling** — Automatic PST/PDT conversion
+- **Responsive Design** — Adapts to mobile and desktop
+- **Performance** — Minimal DOM manipulation, efficient filtering
 
 ## Technical Stack
 
-- **Pure JavaScript** - No framework dependencies (jQuery for DOM manipulation)
-- **Eventbrite API** - JSON data feed integration
-- **Google Analytics** - Event tracking and attribution
-- **Responsive CSS** - Mobile-first design
+- **Pure JavaScript** — No framework dependencies (jQuery for DOM manipulation)
+- **Eventbrite API** — JSON data feed integration
+- **Google Analytics** — Event tracking and attribution
+- **Responsive CSS** — Mobile-first design
 
 ## How It Works
 
 ### Data Flow
 
-1. **Fetch**: Load live event data from Eventbrite JSON endpoint
+1. **Fetch** — Load live event data from Eventbrite JSON endpoint
    ```javascript
    xmlHttp.open("GET", "https://www.pianofight.com/internal/eventbrite-data/events-live-min2.JSON?v=" + randomVar, false)
    ```
 
-2. **Parse**: Extract event details (name, date, price, category, image)
+2. **Parse** — Extract event details (name, date, price, category, image)
 
-3. **Filter**: Apply search terms and filter criteria
+3. **Filter** — Apply search terms and filter criteria
    ```javascript
    myEvents[i]["name"].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
    ```
 
-4. **Organize**: Group events by date
+4. **Organize** — Group events by date
    ```javascript
    dateEvents[eDate.getTime()].push(myEvents[eIndexes[i]]);
    ```
 
-5. **Render**: Build HTML dynamically with highlighted search terms
+5. **Render** — Build HTML dynamically with highlighted search terms
 
-6. **Track**: Append analytics parameters to outbound links
+6. **Track** — Append analytics parameters to outbound links
 
 ### Key Functions
 
-- `feedIndexes()` - Initializes event index array
-- `filterResults()` - Applies search and filter criteria
-- `buildCalendarList()` - Constructs the calendar HTML
-- `perShowHtmlList()` - Generates individual event card HTML
-- `searchHighlight()` - Highlights search terms in results
-- `createDateArray()` - Organizes events by date
-- `gimmeADate()` / `gimmeATime()` - Formats dates and times
+- `feedIndexes()` — Initializes event index array
+- `filterResults()` — Applies search and filter criteria
+- `buildCalendarList()` — Constructs the calendar HTML
+- `perShowHtmlList()` — Generates individual event card HTML
+- `searchHighlight()` — Highlights search terms in results
+- `createDateArray()` — Organizes events by date
+- `gimmeADate()` / `gimmeATime()` — Formats dates and times
 
 ## URL Query Parameters
 
 The widget supports deep linking via query parameters:
 
-- `?q=comedy` - Pre-fills search box with "comedy"
-- `?price=Free` - Shows only free events
-- `?category=Music` - Filters to music events
-- `?date=2024-12-25` - Jumps to Christmas Day events
+- `?q=comedy` — Pre-fills search box with "comedy"
+- `?price=Free` — Shows only free events
+- `?category=Music` — Filters to music events
+- `?date=2024-12-25` — Jumps to events on that date
 
 Example: `https://pianofight.com/calendar?category=Comedy&price=Free`
 
 ## Business Impact
 
-- **Improved Discovery**: Users could easily find events matching their interests
-- **Increased Conversions**: Direct links to Eventbrite improved ticket sales
-- **Better UX**: No need to leave the PianoFight website to browse events
-- **Data Insights**: Analytics tracking showed which events users searched for
-- **SEO Benefits**: Calendar provided fresh, indexed content for search engines
+- **Improved Discovery** — Users could easily find events matching their interests
+- **Increased Conversions** — Direct links to Eventbrite improved ticket sales
+- **Better UX** — No need to leave the PianoFight website to browse events
+- **Data Insights** — Analytics tracking revealed which events users searched for most
+- **SEO Benefits** — Calendar provided fresh, indexed content for search engines
 
 ## Code Highlights
 
@@ -171,8 +171,7 @@ ga(function(tracker) {
 
 ## Future Enhancements
 
-Potential improvements:
-- [ ] Add infinite scroll for better performance with many events
+- [ ] Add infinite scroll for better performance with large event volumes
 - [ ] Include map view showing venue locations
 - [ ] Add social sharing buttons per event
 - [ ] Implement favorites/bookmarking with localStorage
@@ -183,21 +182,21 @@ Potential improvements:
 
 ## Lessons Learned
 
-- **Timezone handling is tricky** - DST changes require dynamic offset calculation
-- **Cache busting is essential** - Random query parameters ensure users see fresh events
-- **Search highlighting improves UX** - Visual feedback helps users understand results
-- **URL state is powerful** - Query parameters enable bookmarking and sharing
-- **Analytics are crucial** - Tracking user behavior informed product decisions
+- **Timezone handling is tricky** — DST changes require dynamic offset calculation
+- **Cache busting is essential** — Random query parameters ensure users see fresh events
+- **Search highlighting improves UX** — Visual feedback helps users understand results
+- **URL state is powerful** — Query parameters enable bookmarking and sharing
+- **Analytics are crucial** — Tracking user behavior informed product decisions
 
 ## Files
 
-- `pf-show-calendar-v2.0.1.js` - Main calendar widget JavaScript
+- `pf-show-calendar-v2.0.1.js` — Main calendar widget JavaScript
 - (HTML and CSS files can be added to show full implementation)
 
 ## License
 
-Proprietary - Internal tool for PianoFight San Francisco (RIP)
+Proprietary — Internal tool for PianoFight San Francisco (RIP)
 
 ---
 
-*This project demonstrates practical JavaScript development, API integration, UX design, and problem-solving skills in a real production environment.*
+*This project demonstrates practical JavaScript development, API integration, UX design, and problem-solving in a real production environment.*
